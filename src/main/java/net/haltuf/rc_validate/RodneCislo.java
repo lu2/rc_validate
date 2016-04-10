@@ -1,8 +1,7 @@
 package net.haltuf.rc_validate;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Validates and provides information about rodne cislo.
@@ -114,8 +113,8 @@ public class RodneCislo {
 
 		try {
 			birthDay = Integer.valueOf(rodneCislo.substring(4, 6));
-			LocalDate.parse(rodneCislo.substring(0,6), DateTimeFormatter.ofPattern("yyMMdd"));
-		} catch (NumberFormatException | DateTimeParseException e) {
+			LocalDate.of(birthYear, birthMonth, birthDay);
+		} catch (NumberFormatException | DateTimeException e) {
 			throw new IllegalArgumentException("rodneCislo has unexpected day");
 		}
 	}

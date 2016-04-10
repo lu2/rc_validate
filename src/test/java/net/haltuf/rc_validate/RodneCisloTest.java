@@ -4,6 +4,13 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * Tests for {@link RodneCislo}.
+ * 
+ * 
+ * @author Lu2
+ *
+ */
 public class RodneCisloTest {
 
 	@Test
