@@ -26,6 +26,16 @@ public class RodneCislo {
 	 * Supported format of rodne cislo.
 	 */
 	public static final String SUPPORTED_FORMAT = "\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d";
+	
+	/**
+	 * Configures minimum possible year for this class
+	 */
+	private static final int MIN_YEAR = 54;
+	
+	/**
+	 * Configures maximum possible year for this class
+	 */
+	private static final int MAX_YEAR = 16;
 
 	/**
 	 * Gender obtained from rodneCislo
@@ -74,7 +84,7 @@ public class RodneCislo {
 		if (!rodneCislo.matches(SUPPORTED_FORMAT)) {
 			throw new IllegalArgumentException("rodneCislo is not 10digit number");
 		}
-		birthSuffix = rodneCislo.substring(8);
+		birthSuffix = rodneCislo.substring(6);
 
 		// je dělitelné jedenácti beze zbytku
 		try {
@@ -87,8 +97,8 @@ public class RodneCislo {
 
 		try {
 			birthYear = Integer.valueOf(rodneCislo.substring(0, 2));
-			// allow only years from 54 until today TODO: externalize
-			if (birthYear < 54 && birthYear >= 16) {
+			// allow only years from 54 until today
+			if (birthYear < MIN_YEAR && birthYear >= MAX_YEAR) {
 				throw new NumberFormatException();
 			}
 		} catch (NumberFormatException e) {
@@ -97,7 +107,7 @@ public class RodneCislo {
 
 		try {
 			int birthMonth = Integer.valueOf(rodneCislo.substring(2, 4));
-			// allow only only 1-12 for males and 51-62 for females TODO: externalize
+			// allow only only 1-12 for males and 51-62 for females
 			if (birthMonth >= 1 && birthMonth <= 12) {
 				gender = Gender.MALE;
 			} else if (birthMonth >= 51 && birthMonth <= 62) {
@@ -118,4 +128,36 @@ public class RodneCislo {
 			throw new IllegalArgumentException("rodneCislo has unexpected day");
 		}
 	}
+
+	public String getRodneCislo() {
+		return rodneCislo;
+	}
+
+	public int getBirthYear() {
+		return birthYear;
+	}
+
+	public int getBirthMonth() {
+		return birthMonth;
+	}
+
+	public int getBirthDay() {
+		return birthDay;
+	}
+
+	public String getBirthSuffix() {
+		return birthSuffix;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	@Override
+	public String toString() {
+		return "RodneCislo [rodneCislo=" + rodneCislo + ", gender=" + gender + ", birthYear=" + birthYear
+				+ ", birthMonth=" + birthMonth + ", birthDay=" + birthDay + "]";
+	}
+	
+	
 }
